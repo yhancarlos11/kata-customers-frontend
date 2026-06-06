@@ -1,11 +1,15 @@
-<section class="card">
+<section id="create" class="card create-panel">
   <h2>Crear cliente</h2>
-  <p class="muted">Aqui puedes registrar un cliente nuevo.</p>
+  <p class="label">Crear nuevo cliente</p>
 
   <form (ngSubmit)="submit()" class="stack">
-    <input [(ngModel)]="customerForm.name" name="customerName" placeholder="Nombre completo" required />
-    <input [(ngModel)]="customerForm.email" name="customerEmail" type="email" placeholder="Correo" required />
-    <button type="submit">Guardar cliente</button>
+    <label for="customerName">Nombre completo</label>
+    <input id="customerName" [(ngModel)]="customerForm.name" name="customerName" placeholder="Nombre completo" required />
+
+    <label for="customerEmail">Correo electronico</label>
+    <input id="customerEmail" [(ngModel)]="customerForm.email" name="customerEmail" type="email" placeholder="Correo electronico" required />
+
+    <button type="submit" class="save-btn">Guardar cliente ✓</button>
   </form>
 
   @if (message) {

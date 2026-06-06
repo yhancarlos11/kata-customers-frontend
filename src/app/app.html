@@ -1,22 +1,38 @@
 <section class="page">
   <header class="hero">
-    <h1>Customers App</h1>
-    <span class="badge">Entorno: {{ frontendProfile }}</span>
+    <h1>
+      <img src="/grupo.png" alt="Logo" class="app-logo" />
+      <span>Customers App</span>
+    </h1>
+    <span class="badge env-pill">Entorno: {{ frontendProfile }}</span>
   </header>
 
   @if (isAuthenticated()) {
     <nav class="main-nav">
-      <a routerLink="/customers/create" routerLinkActive="active">Crear cliente</a>
-      <a routerLink="/customers/list" routerLinkActive="active">Listar clientes</a>
-      <button type="button" class="secondary" (click)="logout()">Cerrar sesion</button>
-    </nav>
-  } @else {
-    <nav class="main-nav">
-      <a routerLink="/auth" routerLinkActive="active">Iniciar sesion o registrarme</a>
+      <a
+        routerLink="/customers/create"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Crear cliente
+      </a>
+      <a
+        routerLink="/customers/list"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Listar clientes
+      </a>
     </nav>
   }
 
   <section class="content-slot">
     <router-outlet></router-outlet>
   </section>
+
+  @if (isAuthenticated()) {
+    <div class="logout-row">
+      <button type="button" class="secondary logout-btn" (click)="logout()">Cerrar sesion</button>
+    </div>
+  }
 </section>
