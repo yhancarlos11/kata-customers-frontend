@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://<RENDER-BACKEND-URL>/api/$1"
+      "destination": "https://kata-customers-backend.onrender.com/api/$1"
     }
   ]
 }
