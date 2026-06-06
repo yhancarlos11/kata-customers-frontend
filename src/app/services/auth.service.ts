@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { Observable, tap } from 'rxjs';
-import { AuthResponse, LoginRequest, RegisterRequest } from '../models/api.models';
+import { Observable, of, tap } from 'rxjs';
+import {
+  AuthMeResponse,
+  AuthResponse,
+  LoginRequest,
+  LogoutResponse,
+  RegisterRequest
+} from '../models/api.models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -31,7 +37,22 @@ export class AuthService {
       .pipe(tap((response) => this.saveToken(response.token)));
   }
 
-  logout(): void {
+  me(): Observable<AuthMeResponse> {
+    return this.http.get<AuthMeResponse>('/api/auth/me');
+  }
+
+  logout(): Observable<LogoutResponse> {
+    if (!this.hasToken()) {
+      this.clearSession();
+      return of({ message: 'Sesion cerrada correctamente' });
+    }
+
+    return this.http
+      .post<LogoutResponse>('/api/auth/logout', {})
+      .pipe(tap(() => this.clearSession()));
+  }
+
+  clearSession(): void {
     this.tokenSignal.set('');
     localStorage.removeItem('kata.jwt');
   }

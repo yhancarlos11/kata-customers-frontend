@@ -37,7 +37,14 @@ describe('AuthService', () => {
     localStorage.setItem('kata.jwt', 'jwt-existing');
 
     expect(service.hasToken()).toBeTrue();
-    service.logout();
+
+    service.logout().subscribe((response) => {
+      expect(response.message).toContain('Sesion cerrada');
+    });
+
+    const req = httpMock.expectOne('/api/auth/logout');
+    expect(req.request.method).toBe('POST');
+    req.flush({ message: 'Sesion cerrada correctamente' });
 
     expect(localStorage.getItem('kata.jwt')).toBeNull();
     expect(service.hasToken()).toBeFalse();

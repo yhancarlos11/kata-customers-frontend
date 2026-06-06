@@ -25,14 +25,41 @@ export class App implements OnInit {
 
   protected readonly isAuthenticated = this.authService.isAuthenticated;
 
+  protected get runtimeProfile(): string {
+    return this.environmentInfo?.activeProfile ?? this.frontendProfile;
+  }
+
   ngOnInit(): void {
     this.logFrontendEnvironment();
     this.loadEnvironmentInfo();
+    this.validateSession();
   }
 
   protected logout(): void {
-    this.authService.logout();
+    this.authService.logout().subscribe({
+      next: () => this.finishLogout(),
+      error: () => this.finishLogout()
+    });
+  }
+
+  private finishLogout(): void {
+    this.authService.clearSession();
     this.router.navigateByUrl('/auth');
+  }
+
+  private validateSession(): void {
+    if (!this.authService.hasToken()) {
+      return;
+    }
+
+    this.authService.me().subscribe({
+      next: () => {
+        // Session is valid, no action needed.
+      },
+      error: () => {
+        this.finishLogout();
+      }
+    });
   }
 
   private loadEnvironmentInfo(): void {
