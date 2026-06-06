@@ -1,11 +1,13 @@
 :root {
-	--ink: #12212e;
-	--muted: #4b6373;
-	--card: #fffdf9;
-	--accent: #146356;
-	--accent-2: #cc5f2f;
-	--warning: #b45309;
-	--line: #d9d1c3;
+	--ink: #142235;
+	--muted: #4c6477;
+	--card: #fffefb;
+	--accent: #156e63;
+	--accent-strong: #0f5a50;
+	--accent-2: #c56f2f;
+	--warning: #a14f15;
+	--line: #d7d0c2;
+	--focus: #2a8bff;
 }
 
 * {
@@ -16,6 +18,7 @@ body {
 	margin: 0;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color: var(--ink);
+	background: linear-gradient(120deg, #f8f3e8 0%, #eef7f3 100%);
 }
 
 h1,
@@ -27,9 +30,9 @@ h3 {
 .card {
 	background: var(--card);
 	border: 1px solid var(--line);
-	border-radius: 1rem;
-	padding: 1rem;
-	box-shadow: 0 10px 25px rgba(18, 33, 46, 0.08);
+	border-radius: 1.1rem;
+	padding: 1.05rem;
+	box-shadow: 0 16px 32px rgba(20, 34, 53, 0.1);
 }
 
 .stack {
@@ -44,6 +47,13 @@ input {
 	padding: 0.6rem 0.75rem;
 	font-size: 0.95rem;
 	background: #fff;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+	outline: none;
+	border-color: var(--focus);
+	box-shadow: 0 0 0 3px rgba(42, 139, 255, 0.18);
 }
 
 button {
@@ -51,9 +61,19 @@ button {
 	border-radius: 0.7rem;
 	padding: 0.65rem 0.9rem;
 	color: #fff;
-	background: linear-gradient(90deg, var(--accent), #1d8f79);
+	background: linear-gradient(90deg, var(--accent-strong), var(--accent));
 	cursor: pointer;
 	font-weight: 600;
+	transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+button:hover {
+	filter: brightness(1.05);
+	box-shadow: 0 10px 16px rgba(16, 78, 70, 0.2);
+}
+
+button:active {
+	transform: translateY(1px);
 }
 
 button.secondary {
@@ -103,4 +123,33 @@ button:disabled {
 	margin-top: 0.8rem;
 	color: var(--muted);
 	font-size: 0.92rem;
+}
+
+app-root .content-slot {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+
+app-root .content-slot app-auth-page,
+app-root .content-slot app-customer-create-page,
+app-root .content-slot app-customer-list-page {
+	display: block;
+	width: 100%;
+	max-width: 760px;
+	margin: 0 auto;
+}
+
+app-root .content-slot .card {
+	margin-inline: auto;
+}
+
+@media (max-width: 640px) {
+	app-root .content-slot app-auth-page,
+	app-root .content-slot app-customer-create-page,
+	app-root .content-slot app-customer-list-page {
+		max-width: 100%;
+	}
 }

@@ -1,25 +1,8 @@
 <section class="page">
   <header class="hero">
-    <h1>{{ appName }}</h1>
-    <p>{{ frontendMessage }}</p>
-    <span class="badge">Frontend profile: {{ frontendProfile }}</span>
+    <h1>Customers App</h1>
+    <span class="badge">Entorno: {{ frontendProfile }}</span>
   </header>
-
-  <section class="grid environment-grid">
-    <article class="card">
-      <h2>Ambiente backend detectado</h2>
-      @if (environmentInfo) {
-        <ul>
-          <li><strong>Aplicacion:</strong> {{ environmentInfo.application }}</li>
-          <li><strong>Puerto:</strong> {{ environmentInfo.port }}</li>
-          <li><strong>Mensaje:</strong> {{ environmentInfo.message }}</li>
-          <li><strong>Perfil activo:</strong> {{ environmentInfo.activeProfile }}</li>
-        </ul>
-      } @else {
-        <p>No se pudo leer /api/info/environment. Verifica que backend este arriba.</p>
-      }
-    </article>
-  </section>
 
   @if (isAuthenticated()) {
     <nav class="main-nav">

@@ -1,5 +1,23 @@
 :host {
   display: block;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.status {
+  margin-top: 0.9rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.65rem;
+  background: #dcf4ed;
+  color: #0d4f43;
+  border: 1px solid #9fd9ca;
+}
+
+.status-error {
+  background: #fde7e7;
+  color: #7a2323;
+  border-color: #f2b5b5;
 }
 
 .row-actions {
@@ -7,4 +25,47 @@
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 27, 43, 0.4);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 80;
+}
+
+.modal-card {
+  width: min(520px, 100%);
+  background: #fffefb;
+  border: 1px solid #d4cfc3;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+}
+
+.modal-card h3 {
+  margin: 0 0 0.5rem;
+}
+
+.modal-card p {
+  margin: 0;
+  line-height: 1.45;
+  color: #334a5a;
+}
+
+.modal-actions {
+  justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+  .row-actions {
+    display: grid;
+  }
+
+  .row-actions button {
+    width: 100%;
+  }
 }

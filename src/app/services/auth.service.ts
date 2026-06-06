@@ -11,6 +11,14 @@ export class AuthService {
   readonly token = computed(() => this.tokenSignal());
   readonly isAuthenticated = computed(() => this.tokenSignal().length > 0);
 
+  constructor() {
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'kata.jwt') {
+        this.tokenSignal.set(event.newValue ?? '');
+      }
+    });
+  }
+
   register(payload: RegisterRequest): Observable<AuthResponse> {
     return this.http
       .post<AuthResponse>('/api/auth/register', payload)
@@ -26,6 +34,19 @@ export class AuthService {
   logout(): void {
     this.tokenSignal.set('');
     localStorage.removeItem('kata.jwt');
+  }
+
+  getToken(): string {
+    const storedToken = localStorage.getItem('kata.jwt') ?? '';
+    if (storedToken !== this.tokenSignal()) {
+      this.tokenSignal.set(storedToken);
+    }
+
+    return storedToken;
+  }
+
+  hasToken(): boolean {
+    return this.getToken().length > 0;
   }
 
   private saveToken(token: string): void {

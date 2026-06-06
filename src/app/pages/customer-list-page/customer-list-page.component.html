@@ -5,7 +5,7 @@
   </div>
 
   @if (message) {
-    <p class="warning">{{ message }}</p>
+    <p class="status" [class.status-error]="messageType === 'error'">{{ message }}</p>
   }
 
   @if (customers.length === 0) {
@@ -39,7 +39,7 @@
             <span>{{ customer.email }}</span>
             <div class="row-actions">
               <button type="button" (click)="startEdit(customer)">Editar</button>
-              <button type="button" class="secondary" (click)="remove(customer.id)">Eliminar</button>
+              <button type="button" class="secondary" (click)="askRemove(customer)">Eliminar</button>
             </div>
           }
         </li>
@@ -47,3 +47,18 @@
     </ul>
   }
 </section>
+
+@if (isDeleteModalOpen) {
+  <div class="modal-backdrop" (click)="closeDeleteModal()">
+    <section class="modal-card" (click)="$event.stopPropagation()">
+      <h3>Confirmar eliminacion</h3>
+      <p>
+        Vas a eliminar a <strong>{{ pendingDeleteName }}</strong>. Esta accion no se puede deshacer.
+      </p>
+      <div class="row-actions modal-actions">
+        <button type="button" class="secondary" (click)="closeDeleteModal()">Cancelar</button>
+        <button type="button" (click)="confirmRemove()">Si, eliminar</button>
+      </div>
+    </section>
+  </div>
+}

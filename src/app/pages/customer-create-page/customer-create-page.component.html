@@ -9,6 +9,6 @@
   </form>
 
   @if (message) {
-    <p class="message">{{ message }}</p>
+    <p class="status" [class.status-error]="messageType === 'error'">{{ message }}</p>
   }
 </section>
