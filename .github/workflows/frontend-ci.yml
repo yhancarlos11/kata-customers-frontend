@@ -7,7 +7,8 @@ on:
     branches: ["main"]
 
 jobs:
-  test-and-build:
+  frontend-ci-checks:
+    name: frontend-ci-checks
     runs-on: ubuntu-22.04
 
     steps:
