@@ -1,5 +1,7 @@
 .auth-card {
+  width: 100%;
   max-width: 520px;
+  margin: 0 auto;
 }
 
 .switcher {
@@ -10,11 +12,36 @@
 
 .switcher button {
   flex: 1;
-  background: #e9e4d9;
+  background: #ebe7dd;
   color: #32424f;
 }
 
 .switcher button.active {
   background: linear-gradient(90deg, var(--accent), #1d8f79);
   color: #fff;
+}
+
+.status {
+  margin-top: 0.9rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.65rem;
+  background: #dcf4ed;
+  color: #0d4f43;
+  border: 1px solid #9fd9ca;
+}
+
+.status-error {
+  background: #fde7e7;
+  color: #7a2323;
+  border-color: #f2b5b5;
+}
+
+@media (max-width: 640px) {
+  .switcher {
+    flex-direction: column;
+  }
+
+  .switcher button {
+    width: 100%;
+  }
 }

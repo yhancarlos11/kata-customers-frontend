@@ -17,16 +17,19 @@ export class CustomerCreatePageComponent {
     email: ''
   };
   protected message = '';
+  protected messageType: 'success' | 'error' = 'success';
 
   protected submit(): void {
     this.message = '';
     this.customerService.create(this.customerForm).subscribe({
       next: () => {
+        this.messageType = 'success';
         this.message = 'Cliente creado correctamente.';
         this.customerForm.name = '';
         this.customerForm.email = '';
       },
       error: (error) => {
+        this.messageType = 'error';
         this.message = this.extractError(error, 'No fue posible crear el cliente.');
       }
     });

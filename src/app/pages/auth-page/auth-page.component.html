@@ -1,23 +1,6 @@
 <section class="card auth-card">
   <h2>Acceso</h2>
-  <p class="muted">Primero elige si quieres iniciar sesion o registrarte.</p>
-
-  <div class="switcher">
-    <button
-      type="button"
-      [class.active]="mode() === 'login'"
-      (click)="switchMode('login')"
-    >
-      Iniciar sesion
-    </button>
-    <button
-      type="button"
-      [class.active]="mode() === 'register'"
-      (click)="switchMode('register')"
-    >
-      Registrarme
-    </button>
-  </div>
+  <p class="muted">Inicia sesion o registrate para continuar.</p>
 
   @if (mode() === 'login') {
     <form (ngSubmit)="submitLogin()" class="stack">
@@ -58,7 +41,24 @@
     </form>
   }
 
+  <div class="switcher">
+    <button
+      type="button"
+      [class.active]="mode() === 'login'"
+      (click)="switchMode('login')"
+    >
+      Iniciar sesion
+    </button>
+    <button
+      type="button"
+      [class.active]="mode() === 'register'"
+      (click)="switchMode('register')"
+    >
+      Registrarme
+    </button>
+  </div>
+
   @if (message) {
-    <p class="message">{{ message }}</p>
+    <p class="status" [class.status-error]="messageType === 'error'">{{ message }}</p>
   }
 </section>

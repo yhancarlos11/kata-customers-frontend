@@ -14,11 +14,15 @@ export class CustomerListPageComponent implements OnInit {
 
   protected customers: Customer[] = [];
   protected message = '';
+  protected messageType: 'success' | 'error' = 'success';
   protected editingId: number | null = null;
   protected editForm: CreateCustomerRequest = {
     name: '',
     email: ''
   };
+  protected isDeleteModalOpen = false;
+  protected pendingDeleteId: number | null = null;
+  protected pendingDeleteName = '';
 
   ngOnInit(): void {
     this.load();
@@ -32,6 +36,7 @@ export class CustomerListPageComponent implements OnInit {
         this.customers = response;
       },
       error: (error) => {
+        this.messageType = 'error';
         this.message = this.extractError(error, 'No fue posible listar clientes.');
       }
     });
@@ -54,28 +59,44 @@ export class CustomerListPageComponent implements OnInit {
     this.message = '';
     this.customerService.update(customerId, this.editForm).subscribe({
       next: () => {
+        this.messageType = 'success';
         this.message = 'Cliente actualizado correctamente.';
         this.load();
       },
       error: (error) => {
+        this.messageType = 'error';
         this.message = this.extractError(error, 'No fue posible actualizar el cliente.');
       }
     });
   }
 
-  protected remove(customerId: number): void {
-    const confirmed = window.confirm('Esta accion eliminara el cliente. Deseas continuar?');
-    if (!confirmed) {
+  protected askRemove(customer: Customer): void {
+    this.pendingDeleteId = customer.id;
+    this.pendingDeleteName = customer.name;
+    this.isDeleteModalOpen = true;
+  }
+
+  protected closeDeleteModal(): void {
+    this.isDeleteModalOpen = false;
+    this.pendingDeleteId = null;
+    this.pendingDeleteName = '';
+  }
+
+  protected confirmRemove(): void {
+    if (!this.pendingDeleteId) {
       return;
     }
 
     this.message = '';
-    this.customerService.delete(customerId).subscribe({
+    this.customerService.delete(this.pendingDeleteId).subscribe({
       next: () => {
+        this.messageType = 'success';
         this.message = 'Cliente eliminado correctamente.';
+        this.closeDeleteModal();
         this.load();
       },
       error: (error) => {
+        this.messageType = 'error';
         this.message = this.extractError(error, 'No fue posible eliminar el cliente.');
       }
     });

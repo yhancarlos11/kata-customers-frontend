@@ -26,6 +26,7 @@ export class AuthPageComponent {
     password: ''
   };
   protected message = '';
+  protected messageType: 'success' | 'error' = 'success';
 
   protected switchMode(mode: 'login' | 'register'): void {
     this.mode.set(mode);
@@ -36,10 +37,12 @@ export class AuthPageComponent {
     this.message = '';
     this.authService.register(this.registerForm).subscribe({
       next: () => {
+        this.messageType = 'success';
         this.message = 'Registro exitoso. Ahora ya puedes crear y listar clientes.';
         this.router.navigateByUrl('/customers/create');
       },
       error: (error) => {
+        this.messageType = 'error';
         this.message = this.extractError(error, 'No fue posible registrar el usuario.');
       }
     });
@@ -49,10 +52,12 @@ export class AuthPageComponent {
     this.message = '';
     this.authService.login(this.loginForm).subscribe({
       next: () => {
+        this.messageType = 'success';
         this.message = 'Login exitoso.';
         this.router.navigateByUrl('/customers/create');
       },
       error: (error) => {
+        this.messageType = 'error';
         this.message = this.extractError(error, 'No fue posible iniciar sesion.');
       }
     });
