@@ -27,6 +27,10 @@ export class AuthPageComponent {
   };
   protected message = '';
   protected messageType: 'success' | 'error' = 'success';
+  protected isSuccessModalOpen = false;
+  protected successModalTitle = '';
+  protected successModalMessage = '';
+  protected successRedirectUrl = '/customers/create';
 
   protected switchMode(mode: 'login' | 'register'): void {
     this.mode.set(mode);
@@ -37,9 +41,11 @@ export class AuthPageComponent {
     this.message = '';
     this.authService.register(this.registerForm).subscribe({
       next: () => {
-        this.messageType = 'success';
-        this.message = 'Registro exitoso. Ahora ya puedes crear y listar clientes.';
-        this.router.navigateByUrl('/customers/create');
+        this.openSuccessModal(
+          'Registro exitoso',
+          'Te has registrado exitosamente.',
+          '/customers/create'
+        );
       },
       error: (error) => {
         this.messageType = 'error';
@@ -52,15 +58,29 @@ export class AuthPageComponent {
     this.message = '';
     this.authService.login(this.loginForm).subscribe({
       next: () => {
-        this.messageType = 'success';
-        this.message = 'Login exitoso.';
-        this.router.navigateByUrl('/customers/create');
+        this.openSuccessModal(
+          'Inicio de sesion exitoso',
+          'Has iniciado sesion exitosamente.',
+          '/customers/create'
+        );
       },
       error: (error) => {
         this.messageType = 'error';
         this.message = this.extractError(error, 'No fue posible iniciar sesion.');
       }
     });
+  }
+
+  protected closeSuccessModal(): void {
+    this.isSuccessModalOpen = false;
+    this.router.navigateByUrl(this.successRedirectUrl);
+  }
+
+  private openSuccessModal(title: string, message: string, redirectUrl: string): void {
+    this.successModalTitle = title;
+    this.successModalMessage = message;
+    this.successRedirectUrl = redirectUrl;
+    this.isSuccessModalOpen = true;
   }
 
   private extractError(error: { error?: { message?: string } }, fallback: string): string {
