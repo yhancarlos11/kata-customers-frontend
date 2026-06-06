@@ -86,16 +86,28 @@ Salida:
 
 Este frontend tiene Dockerfile y Nginx para servir la app y hacer proxy de `/api` al backend.
 
-Para levantar TODO (front + back + db), usa el `docker-compose.yml` del backend:
+Para levantar frontend con backend por ambiente, usa el `docker-compose.yml` del backend:
 
 ```powershell
 cd ..\kata-customers-backend
-docker compose up --build
+docker compose --profile dev up --build -d
 ```
 
-Acceso:
+Acceso en `dev`:
 
 - Frontend: `http://localhost:4200`
+- Backend API: `http://localhost:8080`
+
+Para `prod` simulado:
+
+```powershell
+docker compose down
+docker compose --profile prod up --build -d
+```
+
+Acceso en `prod`:
+
+- Frontend: `http://localhost:4201`
 - Backend API: `http://localhost:9090`
 
 ## Opcion 2 (Docker local + cloud)
