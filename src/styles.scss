@@ -1,0 +1,106 @@
+:root {
+	--ink: #12212e;
+	--muted: #4b6373;
+	--card: #fffdf9;
+	--accent: #146356;
+	--accent-2: #cc5f2f;
+	--warning: #b45309;
+	--line: #d9d1c3;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: var(--ink);
+}
+
+h1,
+h2,
+h3 {
+	font-family: Georgia, 'Times New Roman', serif;
+}
+
+.card {
+	background: var(--card);
+	border: 1px solid var(--line);
+	border-radius: 1rem;
+	padding: 1rem;
+	box-shadow: 0 10px 25px rgba(18, 33, 46, 0.08);
+}
+
+.stack {
+	display: grid;
+	gap: 0.5rem;
+}
+
+input {
+	width: 100%;
+	border: 1px solid var(--line);
+	border-radius: 0.7rem;
+	padding: 0.6rem 0.75rem;
+	font-size: 0.95rem;
+	background: #fff;
+}
+
+button {
+	border: none;
+	border-radius: 0.7rem;
+	padding: 0.65rem 0.9rem;
+	color: #fff;
+	background: linear-gradient(90deg, var(--accent), #1d8f79);
+	cursor: pointer;
+	font-weight: 600;
+}
+
+button.secondary {
+	background: linear-gradient(90deg, var(--accent-2), #d97f49);
+}
+
+button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.card-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+.customer-list {
+	list-style: none;
+	margin: 1rem 0 0;
+	padding: 0;
+	display: grid;
+	gap: 0.55rem;
+}
+
+.customer-list li {
+	border: 1px solid var(--line);
+	border-radius: 0.7rem;
+	padding: 0.6rem 0.75rem;
+	background: #fff;
+	display: grid;
+	gap: 0.2rem;
+}
+
+.message {
+	margin-top: 0.8rem;
+	color: #0f5132;
+}
+
+.warning {
+	margin-top: 0.8rem;
+	color: var(--warning);
+}
+
+.muted {
+	margin-top: 0.8rem;
+	color: var(--muted);
+	font-size: 0.92rem;
+}

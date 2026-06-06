@@ -1,0 +1,201 @@
+:host {
+  --ink: #12212e;
+  --muted: #4b6373;
+  --paper: #f5f2eb;
+  --card: #fffdf9;
+  --accent: #146356;
+  --accent-2: #cc5f2f;
+  --warning: #b45309;
+  --line: #d9d1c3;
+  display: block;
+  min-height: 100vh;
+  color: var(--ink);
+}
+
+.page {
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+  background:
+    radial-gradient(circle at 8% 12%, #f8e9cd 0%, transparent 32%),
+    radial-gradient(circle at 92% 88%, #d8efe6 0%, transparent 34%),
+    linear-gradient(145deg, #f8f6f1 0%, #ece7de 100%);
+}
+
+.hero {
+  max-width: 1100px;
+  margin: 0 auto 1.5rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Georgia, 'Times New Roman', serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
+
+.hero p {
+  margin: 0.5rem 0;
+  color: var(--muted);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  background: linear-gradient(90deg, var(--accent), #2f9c83);
+}
+
+.grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.environment-grid {
+  margin-bottom: 1rem;
+}
+
+.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 10px 25px rgba(18, 33, 46, 0.08);
+}
+
+.card ul {
+  margin: 0.8rem 0 0;
+  padding-left: 1rem;
+}
+
+.stack {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.login-form {
+  margin-top: 1rem;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+button {
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.65rem 0.9rem;
+  color: #fff;
+  background: linear-gradient(90deg, var(--accent), #1d8f79);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button.secondary {
+  background: linear-gradient(90deg, var(--accent-2), #d97f49);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.actions {
+  margin-top: 0.8rem;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.customers {
+  margin-top: 1rem;
+}
+
+.main-nav {
+  max-width: 1100px;
+  margin: 0 auto 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.main-nav a {
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  background: #fff;
+  color: #24404e;
+}
+
+.main-nav a.active {
+  background: #146356;
+  color: #fff;
+  border-color: #146356;
+}
+
+.content-slot {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.customer-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.customer-list li {
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  padding: 0.6rem 0.75rem;
+  background: #fff;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.message {
+  margin-top: 0.8rem;
+  color: #0f5132;
+}
+
+.warning {
+  margin-top: 0.8rem;
+  color: var(--warning);
+}
+
+.token,
+.muted {
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 900px) {
+  .two {
+    grid-template-columns: 1fr;
+  }
+}

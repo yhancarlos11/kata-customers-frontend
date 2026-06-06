@@ -1,0 +1,39 @@
+<section class="page">
+  <header class="hero">
+    <h1>{{ appName }}</h1>
+    <p>{{ frontendMessage }}</p>
+    <span class="badge">Frontend profile: {{ frontendProfile }}</span>
+  </header>
+
+  <section class="grid environment-grid">
+    <article class="card">
+      <h2>Ambiente backend detectado</h2>
+      @if (environmentInfo) {
+        <ul>
+          <li><strong>Aplicacion:</strong> {{ environmentInfo.application }}</li>
+          <li><strong>Puerto:</strong> {{ environmentInfo.port }}</li>
+          <li><strong>Mensaje:</strong> {{ environmentInfo.message }}</li>
+          <li><strong>Perfil activo:</strong> {{ environmentInfo.activeProfile }}</li>
+        </ul>
+      } @else {
+        <p>No se pudo leer /api/info/environment. Verifica que backend este arriba.</p>
+      }
+    </article>
+  </section>
+
+  @if (isAuthenticated()) {
+    <nav class="main-nav">
+      <a routerLink="/customers/create" routerLinkActive="active">Crear cliente</a>
+      <a routerLink="/customers/list" routerLinkActive="active">Listar clientes</a>
+      <button type="button" class="secondary" (click)="logout()">Cerrar sesion</button>
+    </nav>
+  } @else {
+    <nav class="main-nav">
+      <a routerLink="/auth" routerLinkActive="active">Iniciar sesion o registrarme</a>
+    </nav>
+  }
+
+  <section class="content-slot">
+    <router-outlet></router-outlet>
+  </section>
+</section>
