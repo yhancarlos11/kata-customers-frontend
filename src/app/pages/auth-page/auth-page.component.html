@@ -1,0 +1,64 @@
+<section class="card auth-card">
+  <h2>Acceso</h2>
+  <p class="muted">Primero elige si quieres iniciar sesion o registrarte.</p>
+
+  <div class="switcher">
+    <button
+      type="button"
+      [class.active]="mode() === 'login'"
+      (click)="switchMode('login')"
+    >
+      Iniciar sesion
+    </button>
+    <button
+      type="button"
+      [class.active]="mode() === 'register'"
+      (click)="switchMode('register')"
+    >
+      Registrarme
+    </button>
+  </div>
+
+  @if (mode() === 'login') {
+    <form (ngSubmit)="submitLogin()" class="stack">
+      <input [(ngModel)]="loginForm.username" name="loginUsername" placeholder="username" required />
+      <input
+        [(ngModel)]="loginForm.password"
+        name="loginPassword"
+        type="password"
+        placeholder="password"
+        required
+      />
+      <button type="submit">Entrar</button>
+    </form>
+  } @else {
+    <form (ngSubmit)="submitRegister()" class="stack">
+      <input
+        [(ngModel)]="registerForm.username"
+        name="registerUsername"
+        placeholder="username"
+        required
+      />
+      <input
+        [(ngModel)]="registerForm.email"
+        name="registerEmail"
+        type="email"
+        placeholder="email"
+        required
+      />
+      <input
+        [(ngModel)]="registerForm.password"
+        name="registerPassword"
+        type="password"
+        placeholder="password"
+        required
+        minlength="6"
+      />
+      <button type="submit">Crear cuenta</button>
+    </form>
+  }
+
+  @if (message) {
+    <p class="message">{{ message }}</p>
+  }
+</section>

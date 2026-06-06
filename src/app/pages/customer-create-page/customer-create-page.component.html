@@ -1,0 +1,14 @@
+<section class="card">
+  <h2>Crear cliente</h2>
+  <p class="muted">Aqui puedes registrar un cliente nuevo.</p>
+
+  <form (ngSubmit)="submit()" class="stack">
+    <input [(ngModel)]="customerForm.name" name="customerName" placeholder="Nombre completo" required />
+    <input [(ngModel)]="customerForm.email" name="customerEmail" type="email" placeholder="Correo" required />
+    <button type="submit">Guardar cliente</button>
+  </form>
+
+  @if (message) {
+    <p class="message">{{ message }}</p>
+  }
+</section>
