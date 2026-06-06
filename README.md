@@ -23,6 +23,7 @@ Frontend para el reto de ciclo de vida de ambientes (DEV y PROD simulado).
 - TypeScript 5
 - RxJS
 - Karma + Jasmine (unit testing)
+- Docker + Nginx
 
 ## Requisitos
 
@@ -80,6 +81,41 @@ npm run build:prod
 Salida:
 
 - `dist/kata-customers-frontend`
+
+## Docker local (integrado con backend)
+
+Este frontend tiene Dockerfile y Nginx para servir la app y hacer proxy de `/api` al backend.
+
+Para levantar TODO (front + back + db), usa el `docker-compose.yml` del backend:
+
+```powershell
+cd ..\kata-customers-backend
+docker compose up --build
+```
+
+Acceso:
+
+- Frontend: `http://localhost:4200`
+- Backend API: `http://localhost:9090`
+
+## Opcion 2 (Docker local + cloud)
+
+Stack recomendado gratis:
+
+- Frontend: Vercel
+- Backend: Render
+- DB: Neon (PostgreSQL)
+
+Archivo de apoyo para Vercel:
+
+- `vercel.json` (debes reemplazar `<RENDER-BACKEND-URL>` por tu URL real de backend)
+
+## Despliegue continuo (CD)
+
+Si conectas repo GitHub a Vercel y Render con auto deploy:
+
+- Cada push a `main` despliega automaticamente.
+- Esto se considera CD.
 
 ## Flujo de prueba sugerido para la demo
 
