@@ -1,7 +1,10 @@
-<section class="card">
-  <div class="card-title">
-    <h2>Listado de clientes</h2>
-    <button type="button" class="secondary" (click)="load()">Actualizar</button>
+<section class="card customers-card">
+  <div class="customers-header">
+    <div>
+      <p class="eyebrow">Panel de clientes</p>
+      <h2>Listado de clientes</h2>
+    </div>
+    <span class="count-chip">{{ customers.length }} registros</span>
   </div>
 
   @if (message) {
@@ -9,13 +12,16 @@
   }
 
   @if (customers.length === 0) {
-    <p class="muted">Aun no hay clientes para mostrar.</p>
+    <div class="empty-state">
+      <p class="muted">Aun no hay clientes para mostrar.</p>
+      <small>Crea el primer cliente desde la vista de creacion.</small>
+    </div>
   } @else {
     <ul class="customer-list">
       @for (customer of customers; track customer.id) {
-        <li>
+        <li class="customer-item">
           @if (editingId === customer.id) {
-            <form class="stack" (ngSubmit)="saveEdit(customer.id)">
+            <form class="stack edit-form" (ngSubmit)="saveEdit(customer.id)">
               <input
                 [(ngModel)]="editForm.name"
                 name="editName{{ customer.id }}"
@@ -35,8 +41,13 @@
               </div>
             </form>
           } @else {
-            <strong>{{ customer.name }}</strong>
-            <span>{{ customer.email }}</span>
+            <div class="customer-info">
+              <span class="avatar">{{ initials(customer.name) }}</span>
+              <div class="identity">
+                <strong>{{ customer.name }}</strong>
+                <span>{{ customer.email }}</span>
+              </div>
+            </div>
             <div class="row-actions">
               <button type="button" (click)="startEdit(customer)">Editar</button>
               <button type="button" class="secondary" (click)="askRemove(customer)">Eliminar</button>

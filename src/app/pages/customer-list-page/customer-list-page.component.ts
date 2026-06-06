@@ -102,6 +102,16 @@ export class CustomerListPageComponent implements OnInit {
     });
   }
 
+  protected initials(name: string): string {
+    return name
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0]?.toUpperCase() ?? '')
+      .join('');
+  }
+
   private extractError(error: { error?: { message?: string } }, fallback: string): string {
     return error?.error?.message ?? fallback;
   }
