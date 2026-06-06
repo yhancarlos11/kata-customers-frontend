@@ -3,6 +3,10 @@
     {
       "source": "/api/(.*)",
       "destination": "https://kata-customers-backend.onrender.com/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
