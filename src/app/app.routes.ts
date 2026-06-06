@@ -3,6 +3,7 @@ import { guestGuard, authGuard } from './app.guards';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { CustomerCreatePageComponent } from './pages/customer-create-page/customer-create-page.component';
 import { CustomerListPageComponent } from './pages/customer-list-page/customer-list-page.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 
 export const routes: Routes = [
 	{
@@ -14,6 +15,11 @@ export const routes: Routes = [
 		path: 'auth',
 		component: AuthPageComponent,
 		canActivate: [guestGuard]
+	},
+	{
+		path: 'dashboard',
+		component: DashboardPageComponent,
+		canActivate: [authGuard]
 	},
 	{
 		path: 'customers/create',

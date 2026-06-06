@@ -1,61 +1,58 @@
 <section class="card auth-card">
-  <h2>Acceso</h2>
-  <p class="muted">Inicia sesion o registrate para continuar.</p>
+  <div class="auth-chip">Acceso / Registro</div>
 
-  @if (mode() === 'login') {
-    <form (ngSubmit)="submitLogin()" class="stack">
-      <input [(ngModel)]="loginForm.username" name="loginUsername" placeholder="username" required />
-      <input
-        [(ngModel)]="loginForm.password"
-        name="loginPassword"
-        type="password"
-        placeholder="password"
-        required
-      />
-      <button type="submit">Entrar</button>
-    </form>
-  } @else {
-    <form (ngSubmit)="submitRegister()" class="stack">
-      <input
-        [(ngModel)]="registerForm.username"
-        name="registerUsername"
-        placeholder="username"
-        required
-      />
-      <input
-        [(ngModel)]="registerForm.email"
-        name="registerEmail"
-        type="email"
-        placeholder="email"
-        required
-      />
-      <input
-        [(ngModel)]="registerForm.password"
-        name="registerPassword"
-        type="password"
-        placeholder="password"
-        required
-        minlength="6"
-      />
-      <button type="submit">Crear cuenta</button>
-    </form>
-  }
+  <div class="auth-body">
+    <h2>{{ mode() === 'login' ? 'Acceso' : 'Registro' }}</h2>
+    <p class="muted">Inicia sesion o registrate para continuar.</p>
 
-  <div class="switcher">
-    <button
-      type="button"
-      [class.active]="mode() === 'login'"
-      (click)="switchMode('login')"
-    >
-      Iniciar sesion
-    </button>
-    <button
-      type="button"
-      [class.active]="mode() === 'register'"
-      (click)="switchMode('register')"
-    >
-      Registrarme
-    </button>
+    @if (mode() === 'login') {
+      <form (ngSubmit)="submitLogin()" class="stack">
+        <input [(ngModel)]="loginForm.username" name="loginUsername" placeholder="username" required />
+        <input
+          [(ngModel)]="loginForm.password"
+          name="loginPassword"
+          type="password"
+          placeholder="password"
+          required
+        />
+        <button type="submit" class="primary-cta">Entrar con mi cuenta</button>
+      </form>
+    } @else {
+      <form (ngSubmit)="submitRegister()" class="stack">
+        <input
+          [(ngModel)]="registerForm.username"
+          name="registerUsername"
+          placeholder="username"
+          required
+        />
+        <input
+          [(ngModel)]="registerForm.email"
+          name="registerEmail"
+          type="email"
+          placeholder="email"
+          required
+        />
+        <input
+          [(ngModel)]="registerForm.password"
+          name="registerPassword"
+          type="password"
+          placeholder="password"
+          required
+          minlength="6"
+        />
+        <button type="submit" class="primary-cta">Crear mi cuenta</button>
+      </form>
+    }
+
+    <div class="auth-footer">
+      @if (mode() === 'login') {
+        <span>¿No tienes cuenta?</span>
+        <button type="button" class="link-like" (click)="switchMode('register')">Regístrate aquí.</button>
+      } @else {
+        <span>¿Ya tienes cuenta?</span>
+        <button type="button" class="link-like" (click)="switchMode('login')">Inicia sesión aquí.</button>
+      }
+    </div>
   </div>
 
   @if (message && messageType === 'error') {

@@ -1,10 +1,7 @@
-<section class="card customers-card">
+<section id="list" class="card customers-card">
   <div class="customers-header">
-    <div>
-      <p class="eyebrow">Panel de clientes</p>
-      <h2>Listado de clientes</h2>
-    </div>
-    <span class="count-chip">{{ customers.length }} registros</span>
+    <h2>Listado de clientes</h2>
+    <p class="eyebrow">Listado de clientes</p>
   </div>
 
   @if (message) {
@@ -49,8 +46,12 @@
               </div>
             </div>
             <div class="row-actions">
-              <button type="button" (click)="startEdit(customer)">Editar</button>
-              <button type="button" class="secondary" (click)="askRemove(customer)">Eliminar</button>
+              <button type="button" class="icon-btn" aria-label="Editar" (click)="startEdit(customer)">
+                ✎
+              </button>
+              <button type="button" class="icon-btn danger" aria-label="Eliminar" (click)="askRemove(customer)">
+                🗑
+              </button>
             </div>
           }
         </li>

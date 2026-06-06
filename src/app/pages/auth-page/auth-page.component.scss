@@ -1,28 +1,91 @@
 .auth-card {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  max-width: 520px;
+  max-width: 760px;
   margin: 0 auto;
+  padding: 0;
+  border-radius: 0.95rem;
+  box-shadow: 0 14px 34px rgba(22, 33, 44, 0.16);
 }
 
-.switcher {
+.auth-chip {
+  width: fit-content;
+  margin: 0.95rem auto 0.8rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid #d8d2c6;
+  background: #f8f4eb;
+  color: #2f424f;
+  font-size: 0.93rem;
+  box-shadow: 0 8px 16px rgba(20, 34, 53, 0.08);
+}
+
+.auth-body {
+  border-top: 1px solid #ded7ca;
+  padding: 1.1rem 1.7rem 1.3rem;
+}
+
+.auth-body h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.auth-body .muted {
+  margin: 0.45rem 0 0.95rem;
+  font-size: 1rem;
+}
+
+.stack {
+  gap: 0.55rem;
+}
+
+input {
+  border-radius: 0.62rem;
+  background: #ffffff;
+}
+
+.primary-cta {
+  margin-top: 0.45rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 0.9rem;
+  background: linear-gradient(90deg, #111a2b 0%, #28384e 60%, #1f2e44 100%);
+}
+
+.primary-cta:hover {
+  box-shadow: 0 10px 20px rgba(17, 26, 43, 0.24);
+}
+
+.auth-footer {
+  margin-top: 0.85rem;
+  font-size: 0.95rem;
+  color: #364d5a;
   display: flex;
-  gap: 0.5rem;
-  margin: 0.8rem 0 1rem;
+  justify-content: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
 }
 
-.switcher button {
-  flex: 1;
-  background: #ebe7dd;
-  color: #32424f;
+.link-like {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #213544;
+  text-decoration: underline;
+  font-weight: 600;
+  box-shadow: none;
 }
 
-.switcher button.active {
-  background: linear-gradient(90deg, var(--accent), #1d8f79);
-  color: #fff;
+.link-like:hover {
+  filter: none;
+  text-decoration-thickness: 2px;
 }
 
 .status {
-  margin-top: 0.9rem;
+  margin: 0.9rem 1.7rem 1.2rem;
   padding: 0.6rem 0.75rem;
   border-radius: 0.65rem;
   background: #dcf4ed;
@@ -77,12 +140,20 @@
 }
 
 @media (max-width: 640px) {
-  .switcher {
-    flex-direction: column;
+  .auth-card {
+    max-width: 100%;
   }
 
-  .switcher button {
-    width: 100%;
+  .auth-body {
+    padding: 1rem 1rem 1.2rem;
+  }
+
+  .auth-body h2 {
+    font-size: 1.6rem;
+  }
+
+  .status {
+    margin: 0.8rem 1rem 1rem;
   }
 
   .row-actions {

@@ -1,41 +1,27 @@
 :host {
   display: block;
   width: 100%;
-  max-width: 760px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 .customers-card {
-  background: linear-gradient(180deg, #fffef8 0%, #fffdf5 100%);
+  border-radius: 0.7rem;
+  background: #f6f5f6;
 }
 
 .customers-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
+  display: grid;
   margin-bottom: 0.75rem;
+  text-align: center;
 }
 
 .eyebrow {
-  margin: 0 0 0.25rem;
-  color: #5a6c78;
+  margin: 0.2rem 0 0;
+  color: #3e4f5b;
   font-size: 0.8rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-}
-
-.count-chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.35rem 0.65rem;
-  border-radius: 999px;
-  border: 1px solid #d4cfc3;
-  background: #f8f4e8;
-  color: #425868;
-  font-size: 0.86rem;
-  white-space: nowrap;
 }
 
 .status {
@@ -54,10 +40,10 @@
 }
 
 .row-actions {
-  margin-top: 0.6rem;
+  margin-top: 0;
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
 }
 
 .customer-list {
@@ -72,7 +58,11 @@
   border: 1px solid #e3dac6;
   border-radius: 0.8rem;
   background: #fff;
-  padding: 0.75rem;
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
 }
 
 .customer-info {
@@ -82,8 +72,8 @@
 }
 
 .avatar {
-  width: 2rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -92,6 +82,29 @@
   background: #e8f0f4;
   color: #2d4a5f;
   border: 1px solid #c4d6e1;
+}
+
+.icon-btn {
+  min-width: 2rem;
+  height: 2rem;
+  border-radius: 0.45rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: #eef2f4;
+  color: #243746;
+  box-shadow: none;
+}
+
+.icon-btn:hover {
+  filter: none;
+  background: #e1e8ed;
+  box-shadow: none;
+}
+
+.icon-btn.danger {
+  background: #f6ebeb;
+  color: #7a2f2f;
 }
 
 .identity {
@@ -153,20 +166,17 @@
 }
 
 @media (max-width: 640px) {
-  .customers-header {
+  .customer-item {
+    align-items: flex-start;
     flex-direction: column;
-    align-items: stretch;
-  }
-
-  .count-chip {
-    width: fit-content;
   }
 
   .row-actions {
-    display: grid;
+    width: 100%;
+    justify-content: flex-end;
   }
 
-  .row-actions button {
-    width: 100%;
+  .icon-btn {
+    min-width: 2.15rem;
   }
 }
