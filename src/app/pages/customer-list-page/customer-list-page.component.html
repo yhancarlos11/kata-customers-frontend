@@ -10,8 +10,8 @@
 
   @if (customers.length === 0) {
     <div class="empty-state">
-      <p class="muted">Aun no hay clientes para mostrar.</p>
-      <small>Crea el primer cliente desde la vista de creacion.</small>
+      <p class="muted">Aún no hay clientes para mostrar.</p>
+      <small>Crea el primer cliente desde la vista de creación.</small>
     </div>
   } @else {
     <ul class="customer-list">
@@ -77,13 +77,13 @@
 @if (isDeleteModalOpen) {
   <div class="modal-backdrop" (click)="closeDeleteModal()">
     <section class="modal-card" (click)="$event.stopPropagation()">
-      <h3>Confirmar eliminacion</h3>
+      <h3>Confirmar eliminación</h3>
       <p>
-        Vas a eliminar a <strong>{{ pendingDeleteName }}</strong>. Esta accion no se puede deshacer.
+        Vas a eliminar a <strong>{{ pendingDeleteName }}</strong>. Esta acción no se puede deshacer.
       </p>
       <div class="row-actions modal-actions">
         <button type="button" class="secondary" (click)="closeDeleteModal()">Cancelar</button>
-        <button type="button" (click)="confirmRemove()">Si, eliminar</button>
+        <button type="button" (click)="confirmRemove()">Sí, eliminar</button>
       </div>
     </section>
   </div>
@@ -118,7 +118,7 @@
             <textarea
               [(ngModel)]="productForm.description"
               name="productDescription"
-              placeholder="Descripcion (opcional)"
+              placeholder="Descripción (opcional)"
               rows="2"
             ></textarea>
             <div class="row-actions">
@@ -133,7 +133,7 @@
         <section class="product-pane">
           <h4>Lista de productos</h4>
           @if (products.length === 0) {
-            <p class="muted">Este cliente aun no tiene productos.</p>
+            <p class="muted">Este cliente aún no tiene productos.</p>
           } @else {
             <ul class="product-list">
               @for (product of products; track product.id) {

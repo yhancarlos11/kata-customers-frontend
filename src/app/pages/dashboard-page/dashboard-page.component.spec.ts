@@ -29,7 +29,7 @@ describe('DashboardPageComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Listado y gestion de clientes');
+    expect(compiled.textContent).toContain('Listado y gestión de clientes');
     expect(compiled.textContent).toContain('Crear cliente');
     expect(compiled.textContent).toContain('Listado de clientes');
   });

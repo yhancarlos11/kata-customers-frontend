@@ -1,5 +1,10 @@
 export interface AuthResponse {
   token: string;
+  refreshToken: string;
+}
+
+export interface RefreshTokenRequest {
+  refreshToken: string;
 }
 
 export interface AuthMeResponse {
@@ -50,11 +55,4 @@ export interface CreateProductRequest {
 export interface CustomerDetail extends Customer {
   createdAt: string;
   products: Product[];
-}
-
-export interface EnvironmentInfo {
-  application: string;
-  port: string;
-  message: string;
-  activeProfile: string;
 }

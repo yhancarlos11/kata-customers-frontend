@@ -39,7 +39,9 @@ describe('AuthPageComponent', () => {
   });
 
   it('should open success modal on login success and navigate on close', () => {
-    authServiceSpy.login.and.returnValue(of({ token: 'jwt-token' }));
+    authServiceSpy.login.and.returnValue(
+      of({ token: 'jwt-token', refreshToken: 'refresh-token' })
+    );
 
     const fixture = TestBed.createComponent(AuthPageComponent);
     const component = fixture.componentInstance as any;
@@ -50,7 +52,7 @@ describe('AuthPageComponent', () => {
 
     expect(authServiceSpy.login).toHaveBeenCalledWith({ username: 'demo', password: 'secret' });
     expect(component.isSuccessModalOpen).toBeTrue();
-    expect(component.successModalMessage).toContain('Has iniciado sesion exitosamente');
+    expect(component.successModalMessage).toContain('Has iniciado sesión exitosamente');
     expect(routerSpy.navigateByUrl).not.toHaveBeenCalled();
 
     component.closeSuccessModal();

@@ -55,23 +55,6 @@ h1 {
   color: var(--muted);
 }
 
-.badge {
-  display: inline-block;
-  padding: 0.48rem 0.92rem;
-  border-radius: 999px;
-  color: #213644;
-  font-size: 0.85rem;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #d8d2c5;
-  box-shadow: 0 6px 16px rgba(18, 33, 46, 0.12);
-}
-
-.env-pill {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
 .grid {
   max-width: 1100px;
   margin: 0 auto;
@@ -259,11 +242,6 @@ button:disabled {
 
   .page {
     padding: 1.25rem 0.75rem 2rem;
-  }
-
-  .env-pill {
-    position: static;
-    margin-top: 0.55rem;
   }
 }
 

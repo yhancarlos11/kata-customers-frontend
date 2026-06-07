@@ -3,7 +3,7 @@
 
   <div class="auth-body">
     <h2>{{ mode() === 'login' ? 'Acceso' : 'Registro' }}</h2>
-    <p class="muted">Inicia sesion o registrate para continuar.</p>
+    <p class="muted">Inicia sesión o regístrate para continuar.</p>
 
     @if (mode() === 'login') {
       <form (ngSubmit)="submitLogin()" class="stack">

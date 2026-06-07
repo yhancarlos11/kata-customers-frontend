@@ -268,7 +268,7 @@ export class CustomerListPageComponent implements OnInit {
     if (!this.editForm.email?.trim()) {
       errors.email = 'El correo es obligatorio.';
     } else if (!this.isValidEmail(this.editForm.email)) {
-      errors.email = 'Debes ingresar un correo electronico valido.';
+      errors.email = 'Debes ingresar un correo electrónico válido.';
     }
     return errors;
   }
