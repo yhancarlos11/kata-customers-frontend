@@ -42,9 +42,6 @@ export class App implements OnInit {
     }
 
     this.authService.me().subscribe({
-      next: () => {
-        // Session is valid, no action needed.
-      },
       error: () => {
         this.finishLogout();
       }
