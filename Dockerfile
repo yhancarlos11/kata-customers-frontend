@@ -5,7 +5,8 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-RUN npm run build:prod
+ARG BUILD_TARGET=prod
+RUN if [ "$BUILD_TARGET" = "dev" ] || [ "$BUILD_TARGET" = "development" ]; then npm run build:dev; else npm run build:prod; fi
 
 FROM nginx:1.27-alpine
 WORKDIR /usr/share/nginx/html

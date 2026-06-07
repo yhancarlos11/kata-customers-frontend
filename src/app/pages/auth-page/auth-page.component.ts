@@ -27,6 +27,8 @@ export class AuthPageComponent {
   };
   protected message = '';
   protected messageType: 'success' | 'error' = 'success';
+  protected loginErrors: Partial<Record<'username' | 'password', string>> = {};
+  protected registerErrors: Partial<Record<'username' | 'email' | 'password', string>> = {};
   protected isSuccessModalOpen = false;
   protected successModalTitle = '';
   protected successModalMessage = '';
@@ -35,10 +37,19 @@ export class AuthPageComponent {
   protected switchMode(mode: 'login' | 'register'): void {
     this.mode.set(mode);
     this.message = '';
+    this.loginErrors = {};
+    this.registerErrors = {};
   }
 
   protected submitRegister(): void {
     this.message = '';
+    this.registerErrors = this.validateRegisterForm();
+    if (Object.keys(this.registerErrors).length > 0) {
+      this.messageType = 'error';
+      this.message = 'Corrige los errores del formulario.';
+      return;
+    }
+
     this.authService.register(this.registerForm).subscribe({
       next: () => {
         this.openSuccessModal(
@@ -48,6 +59,9 @@ export class AuthPageComponent {
         );
       },
       error: (error) => {
+        this.registerErrors = this.extractValidationErrors(error) as Partial<
+          Record<'username' | 'email' | 'password', string>
+        >;
         this.messageType = 'error';
         this.message = this.extractError(error, 'No fue posible registrar el usuario.');
       }
@@ -56,6 +70,13 @@ export class AuthPageComponent {
 
   protected submitLogin(): void {
     this.message = '';
+    this.loginErrors = this.validateLoginForm();
+    if (Object.keys(this.loginErrors).length > 0) {
+      this.messageType = 'error';
+      this.message = 'Corrige los errores del formulario.';
+      return;
+    }
+
     this.authService.login(this.loginForm).subscribe({
       next: () => {
         this.openSuccessModal(
@@ -65,6 +86,9 @@ export class AuthPageComponent {
         );
       },
       error: (error) => {
+        this.loginErrors = this.extractValidationErrors(error) as Partial<
+          Record<'username' | 'password', string>
+        >;
         this.messageType = 'error';
         this.message = this.extractError(error, 'No fue posible iniciar sesion.');
       }
@@ -83,7 +107,51 @@ export class AuthPageComponent {
     this.isSuccessModalOpen = true;
   }
 
-  private extractError(error: { error?: { message?: string } }, fallback: string): string {
+  private validateLoginForm(): Partial<Record<'username' | 'password', string>> {
+    const errors: Partial<Record<'username' | 'password', string>> = {};
+    if (!this.loginForm.username?.trim()) {
+      errors.username = 'El username es obligatorio.';
+    }
+    if (!this.loginForm.password?.trim()) {
+      errors.password = 'La contraseña es obligatoria.';
+    }
+    return errors;
+  }
+
+  private validateRegisterForm(): Partial<Record<'username' | 'email' | 'password', string>> {
+    const errors: Partial<Record<'username' | 'email' | 'password', string>> = {};
+    if (!this.registerForm.username?.trim()) {
+      errors.username = 'El username es obligatorio.';
+    }
+    if (!this.registerForm.email?.trim()) {
+      errors.email = 'El correo es obligatorio.';
+    } else if (!this.isValidEmail(this.registerForm.email)) {
+      errors.email = 'Debes ingresar un correo electronico valido.';
+    }
+    if (!this.registerForm.password?.trim()) {
+      errors.password = 'La contraseña es obligatoria.';
+    } else if (this.registerForm.password.length < 6) {
+      errors.password = 'La contraseña debe tener al menos 6 caracteres.';
+    }
+    return errors;
+  }
+
+  private isValidEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  private extractValidationErrors(error: { error?: { validationErrors?: Record<string, string> } }): Record<string, string> {
+    return error?.error?.validationErrors ?? {};
+  }
+
+  private extractError(
+    error: { error?: { message?: string; validationErrors?: Record<string, string> } },
+    fallback: string
+  ): string {
+    const validationErrors = error?.error?.validationErrors;
+    if (validationErrors && Object.keys(validationErrors).length > 0) {
+      return Object.values(validationErrors)[0];
+    }
     return error?.error?.message ?? fallback;
   }
 }

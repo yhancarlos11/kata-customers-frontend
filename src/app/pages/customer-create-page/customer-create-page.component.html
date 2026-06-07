@@ -5,9 +5,15 @@
   <form (ngSubmit)="submit()" class="stack">
     <label for="customerName">Nombre completo</label>
     <input id="customerName" [(ngModel)]="customerForm.name" name="customerName" placeholder="Nombre completo" required />
+    @if (fieldErrors.name) {
+      <small class="field-error">{{ fieldErrors.name }}</small>
+    }
 
     <label for="customerEmail">Correo electronico</label>
     <input id="customerEmail" [(ngModel)]="customerForm.email" name="customerEmail" type="email" placeholder="Correo electronico" required />
+    @if (fieldErrors.email) {
+      <small class="field-error">{{ fieldErrors.email }}</small>
+    }
 
     <button type="submit" class="save-btn">Guardar cliente ✓</button>
   </form>

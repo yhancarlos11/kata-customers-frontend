@@ -25,6 +25,9 @@
                 placeholder="Nombre"
                 required
               />
+              @if (editErrors.name) {
+                <small class="field-error">{{ editErrors.name }}</small>
+              }
               <input
                 [(ngModel)]="editForm.email"
                 name="editEmail{{ customer.id }}"
@@ -32,6 +35,9 @@
                 type="email"
                 required
               />
+              @if (editErrors.email) {
+                <small class="field-error">{{ editErrors.email }}</small>
+              }
               <div class="row-actions">
                 <button type="submit">Guardar</button>
                 <button type="button" class="secondary" (click)="cancelEdit()">Cancelar</button>
@@ -46,6 +52,14 @@
               </div>
             </div>
             <div class="row-actions">
+              <button
+                type="button"
+                class="icon-btn"
+                aria-label="Ver detalle"
+                (click)="viewDetails(customer.id)"
+              >
+                👁
+              </button>
               <button type="button" class="icon-btn" aria-label="Editar" (click)="startEdit(customer)">
                 ✎
               </button>
@@ -70,6 +84,80 @@
       <div class="row-actions modal-actions">
         <button type="button" class="secondary" (click)="closeDeleteModal()">Cancelar</button>
         <button type="button" (click)="confirmRemove()">Si, eliminar</button>
+      </div>
+    </section>
+  </div>
+}
+
+@if (isDetailModalOpen && selectedCustomer) {
+  <div class="modal-backdrop" (click)="closeDetailModal()">
+    <section class="modal-card detail-modal" (click)="$event.stopPropagation()">
+      <h3>{{ selectedCustomer.name }}</h3>
+      <p class="detail-subtitle">{{ selectedCustomer.email }}</p>
+
+      <div class="products-layout">
+        <section class="product-pane">
+          <h4>Crear producto</h4>
+          <form class="stack product-form" (ngSubmit)="saveProduct()">
+            <input [(ngModel)]="productForm.name" name="productName" placeholder="Nombre del producto" required />
+            @if (productErrors.name) {
+              <small class="field-error">{{ productErrors.name }}</small>
+            }
+            <input
+              [(ngModel)]="productForm.price"
+              name="productPrice"
+              placeholder="Precio"
+              type="number"
+              min="0.01"
+              step="0.01"
+              required
+            />
+            @if (productErrors.price) {
+              <small class="field-error">{{ productErrors.price }}</small>
+            }
+            <textarea
+              [(ngModel)]="productForm.description"
+              name="productDescription"
+              placeholder="Descripcion (opcional)"
+              rows="2"
+            ></textarea>
+            <div class="row-actions">
+              <button type="submit">{{ editingProductId ? 'Actualizar producto' : 'Crear producto' }}</button>
+              @if (editingProductId) {
+                <button type="button" class="secondary" (click)="cancelProductEdit()">Cancelar</button>
+              }
+            </div>
+          </form>
+        </section>
+
+        <section class="product-pane">
+          <h4>Lista de productos</h4>
+          @if (products.length === 0) {
+            <p class="muted">Este cliente aun no tiene productos.</p>
+          } @else {
+            <ul class="product-list">
+              @for (product of products; track product.id) {
+                <li>
+                  <div class="product-info">
+                    <strong>{{ product.name }}</strong>
+                    <span>{{ formatPrice(product.price) }}</span>
+                    @if (product.description) {
+                      <small>{{ product.description }}</small>
+                    }
+                  </div>
+                  <div class="row-actions">
+                    <button type="button" class="icon-btn" (click)="editProduct(product)">✎</button>
+                    <button type="button" class="icon-btn danger" (click)="removeProduct(product.id)">🗑</button>
+                  </div>
+                </li>
+              }
+            </ul>
+          }
+        </section>
+      </div>
+
+      <div class="row-actions modal-actions">
+        <button type="button" class="secondary" (click)="closeDetailModal()">Cerrar</button>
       </div>
     </section>
   </div>

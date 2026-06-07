@@ -34,6 +34,24 @@ export interface Customer {
   email: string;
 }
 
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  description?: string;
+}
+
+export interface CreateProductRequest {
+  name: string;
+  price: number;
+  description?: string;
+}
+
+export interface CustomerDetail extends Customer {
+  createdAt: string;
+  products: Product[];
+}
+
 export interface EnvironmentInfo {
   application: string;
   port: string;

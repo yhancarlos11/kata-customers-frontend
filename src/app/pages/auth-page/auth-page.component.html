@@ -8,6 +8,9 @@
     @if (mode() === 'login') {
       <form (ngSubmit)="submitLogin()" class="stack">
         <input [(ngModel)]="loginForm.username" name="loginUsername" placeholder="username" required />
+        @if (loginErrors.username) {
+          <small class="field-error">{{ loginErrors.username }}</small>
+        }
         <input
           [(ngModel)]="loginForm.password"
           name="loginPassword"
@@ -15,6 +18,9 @@
           placeholder="password"
           required
         />
+        @if (loginErrors.password) {
+          <small class="field-error">{{ loginErrors.password }}</small>
+        }
         <button type="submit" class="primary-cta">Entrar con mi cuenta</button>
       </form>
     } @else {
@@ -25,6 +31,9 @@
           placeholder="username"
           required
         />
+        @if (registerErrors.username) {
+          <small class="field-error">{{ registerErrors.username }}</small>
+        }
         <input
           [(ngModel)]="registerForm.email"
           name="registerEmail"
@@ -32,6 +41,9 @@
           placeholder="email"
           required
         />
+        @if (registerErrors.email) {
+          <small class="field-error">{{ registerErrors.email }}</small>
+        }
         <input
           [(ngModel)]="registerForm.password"
           name="registerPassword"
@@ -40,6 +52,9 @@
           required
           minlength="6"
         />
+        @if (registerErrors.password) {
+          <small class="field-error">{{ registerErrors.password }}</small>
+        }
         <button type="submit" class="primary-cta">Crear mi cuenta</button>
       </form>
     }
