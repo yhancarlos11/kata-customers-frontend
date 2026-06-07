@@ -57,6 +57,8 @@ describe('CustomerCreatePageComponent', () => {
 
     const fixture = TestBed.createComponent(CustomerCreatePageComponent);
     const component = fixture.componentInstance as any;
+    component.customerForm.name = 'Ana';
+    component.customerForm.email = 'ana@email.com';
 
     component.submit();
 

@@ -64,6 +64,9 @@ describe('AuthPageComponent', () => {
 
     const fixture = TestBed.createComponent(AuthPageComponent);
     const component = fixture.componentInstance as any;
+    component.registerForm.username = 'demoUser';
+    component.registerForm.email = 'demo@correo.com';
+    component.registerForm.password = 'secret123';
 
     component.submitRegister();
 

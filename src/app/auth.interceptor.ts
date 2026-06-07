@@ -7,7 +7,10 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const token = authService.getToken();
 
-  const requiresJwt = req.url.startsWith('/api/customers');
+  const requiresJwt =
+    req.url.startsWith('/api/customers') ||
+    req.url.startsWith('/api/auth/me') ||
+    req.url.startsWith('/api/auth/logout');
   if (!requiresJwt) {
     return next(req);
   }

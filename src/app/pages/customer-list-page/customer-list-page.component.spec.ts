@@ -10,10 +10,23 @@ describe('CustomerListPageComponent', () => {
     customerServiceSpy = jasmine.createSpyObj<CustomerService>('CustomerService', [
       'list',
       'update',
-      'delete'
+      'delete',
+      'getById',
+      'createProduct',
+      'updateProduct',
+      'deleteProduct'
     ]);
 
     customerServiceSpy.list.and.returnValue(of([{ id: 1, name: 'Yhan', email: 'yhan@correo.com' }]));
+    customerServiceSpy.getById.and.returnValue(
+      of({
+        id: 1,
+        name: 'Yhan',
+        email: 'yhan@correo.com',
+        createdAt: '2026-06-06T10:00:00',
+        products: []
+      })
+    );
 
     await TestBed.configureTestingModule({
       imports: [CustomerListPageComponent],
