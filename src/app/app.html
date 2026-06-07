@@ -4,7 +4,6 @@
       <img src="/grupo.png" alt="Logo" class="app-logo" />
       <span>Customers App</span>
     </h1>
-    <span class="badge env-pill">Entorno: {{ runtimeProfile }}</span>
   </header>
 
   @if (isAuthenticated()) {
@@ -32,7 +31,7 @@
 
   @if (isAuthenticated()) {
     <div class="logout-row">
-      <button type="button" class="secondary logout-btn" (click)="logout()">Cerrar sesion</button>
+      <button type="button" class="secondary logout-btn" (click)="logout()">Cerrar sesión</button>
     </div>
   }
 </section>

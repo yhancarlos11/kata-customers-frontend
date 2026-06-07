@@ -53,7 +53,7 @@ export class CustomerCreatePageComponent {
     if (!this.customerForm.email?.trim()) {
       errors.email = 'El correo es obligatorio.';
     } else if (!this.isValidEmail(this.customerForm.email)) {
-      errors.email = 'Debes ingresar un correo electronico valido.';
+      errors.email = 'Debes ingresar un correo electrónico válido.';
     }
     return errors;
   }

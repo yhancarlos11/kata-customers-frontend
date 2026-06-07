@@ -80,8 +80,8 @@ export class AuthPageComponent {
     this.authService.login(this.loginForm).subscribe({
       next: () => {
         this.openSuccessModal(
-          'Inicio de sesion exitoso',
-          'Has iniciado sesion exitosamente.',
+          'Inicio de sesión exitoso',
+          'Has iniciado sesión exitosamente.',
           '/customers/create'
         );
       },
@@ -90,7 +90,7 @@ export class AuthPageComponent {
           Record<'username' | 'password', string>
         >;
         this.messageType = 'error';
-        this.message = this.extractError(error, 'No fue posible iniciar sesion.');
+        this.message = this.extractError(error, 'No fue posible iniciar sesión.');
       }
     });
   }
@@ -126,7 +126,7 @@ export class AuthPageComponent {
     if (!this.registerForm.email?.trim()) {
       errors.email = 'El correo es obligatorio.';
     } else if (!this.isValidEmail(this.registerForm.email)) {
-      errors.email = 'Debes ingresar un correo electronico valido.';
+      errors.email = 'Debes ingresar un correo electrónico válido.';
     }
     if (!this.registerForm.password?.trim()) {
       errors.password = 'La contraseña es obligatoria.';
