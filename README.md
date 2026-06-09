@@ -112,7 +112,7 @@ Acceso en `prod`:
 
 ## Opcion 2 (Docker local + cloud)
 
-Stack recomendado gratis:
+Stack implementado:
 
 - Frontend: Vercel
 - Backend: Render
@@ -122,35 +122,9 @@ Archivo de apoyo para Vercel:
 
 - `vercel.json` (rewrite `/api` al backend cloud + fallback SPA)
 
-## Configuracion de despliegue frontend (Vercel)
-
-Referencia completa:
-
-- `../DEPLOYMENT.md`
-
-Resumen frontend:
-
-- Build Command: `npm run build:prod`
-- Install Command: `npm ci`
-- Output Directory: `dist/kata-customers-frontend/browser`
-
-Configuracion de `vercel.json` usada:
-
-- `"/api/(.*)" -> "https://kata-customers-backend.onrender.com/api/$1"`
-- `"/(.*)" -> "/index.html"`
-
-Validacion cloud frontend:
-
-- Abrir URL de Vercel
-- Probar login/registro
-- Probar CRUD de clientes contra backend Render
-
 ## Despliegue continuo (CD)
 
-Si conectas repo GitHub a Vercel y Render con auto deploy:
-
 - Cada push a `main` despliega automaticamente.
-- Esto se considera CD.
 
 ## Integracion continua (CI) y gate de calidad
 
@@ -163,15 +137,3 @@ El workflow ejecuta en cada push/PR a `main`:
 - build de produccion (`npm run build:prod`)
 - pruebas unitarias (`npm test -- --watch=false --browsers=ChromeHeadless --no-progress`)
 
-Para que el despliegue a produccion quede condicionado a CI:
-
-- habilitar Branch protection sobre `main`
-- marcar como required check el workflow `Frontend CI`
-- mantener deploy en Vercel desde `main`
-
-## Flujo de prueba sugerido para la demo
-
-1. Levantar backend en DEV y luego frontend con `npm run start:dev`.
-2. Registrar usuario, iniciar sesion, crear cliente y listar clientes.
-3. Levantar backend en PROD simulado y luego frontend con `npm run start:prod`.
-4. Mostrar cambios en perfil, puerto y mensaje de ambiente desde la UI.
